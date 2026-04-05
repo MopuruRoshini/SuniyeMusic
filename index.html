@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SUNIYE — Music Player</title>
+<link rel="icon" type="image/png" href="image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Syne+Mono&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- Dynamic mood background -->
+<div id="moodBg" class="mood-bg">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+  <div class="noise"></div>
+</div>
+
+<div class="app">
+
+  <!-- ── LEFT SIDEBAR ── -->
+  <aside class="sidebar">
+    <div class="logo">
+      <span class="logo-icon">◈</span>
+      <span class="logo-text">SUNIYE</span>
+    </div>
+
+    <!-- Language filters -->
+    <div class="section-label">Languages</div>
+    <nav class="lang-nav">
+      <button class="lang-btn active" data-lang="all">
+        <i class="fa-solid fa-globe"></i> All Songs
+        <span class="lang-count">20</span>
+      </button>
+      <button class="lang-btn" data-lang="telugu">
+        <span class="flag">🌐</span> Telugu
+        <span class="lang-count">5</span>
+      </button>
+      <button class="lang-btn" data-lang="hindi">
+        <span class="flag">🌐</span> Hindi
+        <span class="lang-count">5</span>
+      </button>
+      <button class="lang-btn" data-lang="english">
+        <span class="flag">🌐</span> English
+        <span class="lang-count">5</span>
+      </button>
+      <button class="lang-btn" data-lang="tamil">
+        <span class="flag">🌐</span> Tamil
+        <span class="lang-count">5</span>
+      </button>
+    </nav>
+
+    <!-- Mood filters -->
+    <div class="section-label" style="margin-top:28px">MOOD</div>
+    <nav class="mood-nav">
+      <button class="mood-btn active" data-mood="all">✦ All Moods</button>
+      <button class="mood-btn" data-mood="sad">💔 Sad / Emotional</button>
+      <button class="mood-btn" data-mood="happy">☀️ Happy / Chill</button>
+      <button class="mood-btn" data-mood="party">🔥 Party / Hype</button>
+      <button class="mood-btn" data-mood="melody">🎵 Melody / Romantic</button>
+    </nav>
+
+    <!-- Now playing mini -->
+    <div class="mini-now-playing" id="miniNowPlaying">
+      <div class="mini-art" id="miniArt"></div>
+      <div class="mini-info">
+        <div class="mini-title" id="miniTitle">—</div>
+        <div class="mini-artist" id="miniArtist">Select a song</div>
+      </div>
+      <button class="mini-play" id="miniPlayBtn">
+        <i class="fa-solid fa-play" id="miniPlayIcon"></i>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ── MAIN CONTENT ── -->
+  <div class="main">
+
+    <!-- Top bar -->
+    <header class="topbar">
+      <div class="search-wrap">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="searchInput" placeholder="Search songs, artists…" autocomplete="off"/>
+      </div>
+      <div class="topbar-right">
+        <div class="current-mood-badge" id="moodBadge">
+          <span id="moodEmoji">✦</span>
+          <span id="moodLabel">All Moods</span>
+        </div>
+        <button class="icon-btn" id="themeBtn" title="Toggle theme">
+          <i class="fa-solid fa-circle-half-stroke"></i>
+        </button>
+        <button class="icon-btn" id="shuffleTopBtn" title="Shuffle (S)">
+          <i class="fa-solid fa-shuffle"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Section heading -->
+    <div class="section-heading">
+      <div>
+        <h2 id="sectionTitle">All Songs</h2>
+        <p id="sectionSub">40 tracks · Telugu · Hindi · English · Tamil</p>
+      </div>
+      <div class="view-toggle">
+        <button class="vt-btn active" data-view="list" title="List view"><i class="fa-solid fa-list"></i></button>
+        <button class="vt-btn" data-view="grid" title="Grid view"><i class="fa-solid fa-grip"></i></button>
+      </div>
+    </div>
+
+    <!-- Track list / grid -->
+    <div class="track-container" id="trackContainer">
+      <!-- filled by JS -->
+    </div>
+
+  </div>
+
+  <!-- ── RIGHT: NOW PLAYING PANEL ── -->
+  <div class="now-playing-panel" id="nowPlayingPanel">
+    <!-- Artwork -->
+    <div class="np-art-wrap">
+      <div class="np-art-glow" id="npGlow"></div>
+      <div class="np-art" id="npArt">
+        <div class="np-art-inner" id="npArtInner"></div>
+      </div>
+      <!-- Visualiser bars -->
+      <div class="np-visualiser" id="npVis">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span>
+      </div>
+    </div>
+
+    <!-- Info -->
+    <div class="np-info">
+      <div class="np-lang-badge" id="npLangBadge">TELUGU</div>
+      <div class="np-mood-tag" id="npMoodTag"><span id="npMoodIcon">💙</span> <span id="npMoodText">Sad</span></div>
+    </div>
+    <h2 class="np-title" id="npTitle">Select a song</h2>
+    <p class="np-artist" id="npArtist">—</p>
+    <p class="np-album" id="npAlbum">—</p>
+
+    <!-- Love / Add -->
+    <div class="np-actions">
+      <button class="np-act-btn" id="loveBtn" title="Like"><i class="fa-regular fa-heart" id="heartIcon"></i></button>
+      <button class="np-act-btn" title="Share"><i class="fa-solid fa-share-nodes"></i></button>
+      <button class="np-act-btn" title="More"><i class="fa-solid fa-ellipsis"></i></button>
+    </div>
+
+    <!-- Progress -->
+    <div class="np-progress">
+      <div class="np-prog-track" id="progTrack">
+        <div class="np-prog-fill" id="progFill"></div>
+        <div class="np-prog-thumb" id="progThumb"></div>
+      </div>
+      <div class="np-time">
+        <span id="tCurrent">0:00</span>
+        <span id="tTotal">0:00</span>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="np-controls">
+      <button class="npc-btn npc-sm" id="shuffleBtn" title="Shuffle (S)">
+        <i class="fa-solid fa-shuffle"></i>
+      </button>
+      <button class="npc-btn npc-md" id="prevBtn">
+        <i class="fa-solid fa-backward-step"></i>
+      </button>
+      <button class="npc-btn npc-lg" id="playBtn">
+        <i class="fa-solid fa-play" id="playIcon"></i>
+      </button>
+      <button class="npc-btn npc-md" id="nextBtn">
+        <i class="fa-solid fa-forward-step"></i>
+      </button>
+      <button class="npc-btn npc-sm" id="repeatBtn" title="Repeat (R)">
+        <i class="fa-solid fa-repeat"></i>
+      </button>
+    </div>
+
+    <!-- Volume -->
+    <div class="np-volume">
+      <button class="vol-icon-btn" id="muteBtn">
+        <i class="fa-solid fa-volume-high" id="volIcon"></i>
+      </button>
+      <div class="vol-slider" id="volSlider">
+        <div class="vol-fill" id="volFill"></div>
+        <div class="vol-thumb" id="volThumb"></div>
+      </div>
+      <span class="vol-num" id="volNum">80</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- Mobile bottom player -->
+<div class="mobile-player" id="mobilePlayer">
+  <div class="mp-art" id="mpArt"></div>
+  <div class="mp-info">
+    <div class="mp-title" id="mpTitle">—</div>
+    <div class="mp-artist" id="mpArtist">Select a song</div>
+  </div>
+  <button class="mp-play" id="mpPlayBtn"><i class="fa-solid fa-play" id="mpIcon"></i></button>
+  <button class="mp-next" id="mpNextBtn"><i class="fa-solid fa-forward-step"></i></button>
+</div>
+
+<audio id="audio" preload="metadata"></audio>
+
+<script src="script.js"></script>
+</body>
+</html>
