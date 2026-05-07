@@ -788,3 +788,38 @@ ul{list-style:none}
   object-fit: cover;
   display: block;
 }
+.profile{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:6px 12px;
+    background:#1a1a1a;
+    border-radius:30px;
+}
+
+.profile img{
+    width:35px;
+    height:35px;
+    border-radius:50%;
+}
+
+.profile span{
+    color:white;
+    font-size:14px;
+    font-weight:600;
+}
+#logoutBtn{
+    border:none;
+    padding:6px 12px;
+    border-radius:20px;
+    background:#ff4d4d;
+    color:white;
+    cursor:pointer;
+    font-size:12px;
+    font-weight:600;
+    transition:0.3s;
+}
+
+#logoutBtn:hover{
+    background:#ff1a1a;
+}

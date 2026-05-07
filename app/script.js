@@ -1,7 +1,9 @@
 
 'use strict';
 
-
+if(!localStorage.getItem("username")){
+    window.location.href = "../loginSignup/index.html";
+}
 const TRACKS = [
   /* ── TELUGU ─────────────────────────────── */
   { id: 1, lang: "telugu", mood: "melody",
@@ -42,10 +44,10 @@ const TRACKS = [
 
   /* ── HINDI ─────────────────────────────── */
   { id: 6, lang: "hindi", mood: "sad",
-    title: "Bulleya", artist: "Amit Mishra, Shilpa Rao",
-    album: "Ae Dil Hai Mushkil", duration: "5:47",
-    cover: "https://i.pinimg.com/736x/2a/da/15/2ada1553a640acc8e94d6d4d78cc6aff.jpg",
-    src: "songs/Bulleya Ae Dil Hai Mushkil Aishwarya Ranbir(PagaiWorld.com).mp3",
+    title: "Bulleya", artist: "Papon",
+    album: "Sultan", duration: "5:57",
+    cover: "https://lh3.googleusercontent.com/9qFfsVs_ZuwP2kEk0VAiOVgmgPyRmiCIzAon1WTD4PpRGeGp-cLYQR8vkmO8Bo3zRpIpi893w3hpayp8",
+    src: "songs/Bulleya 128 Kbps.mp3",
     colors: ["#172554","#2563eb","#bfdbfe"]
   },
   { id: 7, lang: "hindi", mood: "party",
@@ -73,7 +75,7 @@ const TRACKS = [
     title: "Bekhayali", artist: "Sachet Tandon",
     album: "Kabir Singh", duration: "6:11",
     cover: "https://i.pinimg.com/736x/9a/6d/18/9a6d184f814dd708d0dc5cd24686f5e6.jpg",
-    src: "songs/Bekhayali Full Kabir Singh Shahid KKira A Sandeep(PagaiWorld.com).mp3",
+    src: "songs/Bekhayali.mp3",
     colors: ["#1e3a5f","#3b82f6","#93c5fd"]
   },
 
@@ -799,4 +801,21 @@ document.querySelectorAll('.vt-btn').forEach(btn => {
     // re-render
     renderTracks();
   });
+});
+// GET USERNAME
+const savedUsername = localStorage.getItem("username");
+
+if(savedUsername){
+    document.getElementById("profileName").textContent = savedUsername;
+}
+// LOGOUT
+const logoutBtn = document.getElementById("logoutBtn");
+
+logoutBtn.addEventListener("click", () => {
+
+    // remove saved username
+    localStorage.removeItem("username");
+
+    // go back to login page
+    window.location.href = "../loginSignup/index.html";
 });

@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>SUNIYE — Music Player</title>
 <link rel="icon" type="image/png" href="image.png">
+<link rel="icon" type="image/png" href="image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Syne+Mono&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
@@ -88,6 +89,16 @@
         <input type="text" id="searchInput" placeholder="Search songs, artists…" autocomplete="off"/>
       </div>
       <div class="topbar-right">
+        <div class="profile">
+
+    <img src="logo.png" alt="profile">
+
+    <span id="profileName"></span>
+
+    <button id="logoutBtn">Logout</button>
+
+</div>
+        
         <div class="current-mood-badge" id="moodBadge">
           <span id="moodEmoji">✦</span>
           <span id="moodLabel">All Moods</span>
