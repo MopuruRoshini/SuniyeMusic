@@ -817,5 +817,5 @@ logoutBtn.addEventListener("click", () => {
     localStorage.removeItem("username");
 
     // go back to login page
-    window.location.href = "../loginSignup/index.html";
+    window.location.href = "/loginSignup/index.html";
 });

@@ -20,5 +20,5 @@ loginBtn.addEventListener("click", () => {
     localStorage.setItem("username", username);
 
     // open app
-    window.location.href = "../app/index.html";
+    window.location.href = "/app/index.html";
 });
