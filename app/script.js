@@ -809,13 +809,3 @@ if(savedUsername){
     document.getElementById("profileName").textContent = savedUsername;
 }
 // LOGOUT
-const logoutBtn = document.getElementById("logoutBtn");
-
-logoutBtn.addEventListener("click", () => {
-
-    // remove saved username
-    localStorage.removeItem("username");
-
-    // go back to login page
-    window.location.href = "/loginSignup/index.html";
-});
